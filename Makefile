@@ -7,8 +7,8 @@ LD_FLAGS = -flto -Ofast -lpthread
 
 # File names
 TARGET = ADTF-Streaming.so
-HEADERS = $(wildcard *.h) $(wildcard **/*.h)
-SOURCES = $(wildcard *.cpp) $(wildcard **/*.cpp)
+HEADERS = $(shell find . -name "*.h")
+SOURCES = $(shell find . -name "*.cpp")
 OBJECTS = $(SOURCES:.cpp=.o)
 
 # Main target linking

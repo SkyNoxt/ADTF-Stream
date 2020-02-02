@@ -3,7 +3,7 @@
 
 #include <cstdio>
 
-class Sample
+class Block
 {
 public:
 #pragma pack(push)
@@ -20,6 +20,11 @@ public:
 		unsigned short streamId = 0;
 		unsigned short flags = 0;
 		unsigned long streamIndexEntry = 0;
+
+		unsigned char sampleVersion = 0;
+		unsigned int sampleSize = 0;
+		unsigned long sampleTimeStamp = 0;
+		unsigned int sampleFlags = 0;
 	};
 
 #pragma pack(pop)
@@ -29,8 +34,8 @@ public:
 	unsigned char* data = nullptr;
 
 	// Constructor
-	Sample(FILE* file);
+	Block(FILE* file);
 
 	// Destructor
-	~Sample();
+	~Block();
 };

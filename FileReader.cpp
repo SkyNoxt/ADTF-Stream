@@ -1,7 +1,7 @@
 
 #include "FileReader.h"
 
-void FileReader::start(std::function<void(const Sample*)> callback)
+void FileReader::start(std::function<void(const Block*)> callback)
 {
 	finished = false;
 	producer = new std::thread(&FileReader::produce, this);
@@ -54,7 +54,7 @@ void FileReader::produce()
 	condition.notify_all();
 }
 
-void FileReader::consume(std::function<void(const Sample*)> callback)
+void FileReader::consume(std::function<void(const Block*)> callback)
 {
 	while (true)
 	{

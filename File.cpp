@@ -1,14 +1,14 @@
 
 #include "File.h"
 
-File::FileHeader::FileHeader(FILE* file)
+File::Header::Header(FILE* file)
 {
-	fread(this, sizeof(FileHeader), 1, file);
+	fread(this, sizeof(Header), 1, file);
 }
 
-Sample* File::read()
+Block* File::read()
 {
-	return new Sample(file);
+	return new Block(file);
 }
 
 void File::seek(unsigned int entry)
@@ -19,7 +19,7 @@ void File::seek(unsigned int entry)
 File::File(const char* filePath)
 	: file(fopen(filePath, "rb"))
 {
-	header = FileHeader(file);
+	header = Header(file);
 
 	fseek(file, header.extensionOffset, SEEK_SET);
 	extensions = new ExtensionHeader[header.extensionCount];

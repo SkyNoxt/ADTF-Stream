@@ -16,7 +16,7 @@ public:
 	File* file = nullptr;
 
 	// Member functions
-	void start(std::function<void(const Sample*)> callback);
+	void start(std::function<void(const Block*)> callback);
 	void stop();
 
 	// Constructors
@@ -30,7 +30,7 @@ private:
 	// Member variables
 	std::mutex mutex;
 	std::condition_variable condition;
-	std::queue<Sample*> queue;
+	std::queue<Block*> queue;
 
 	std::thread* producer = nullptr;
 	std::thread* consumer = nullptr;
@@ -39,5 +39,5 @@ private:
 
 	// Member functions
 	void produce();
-	void consume(std::function<void(const Sample*)> callback);
+	void consume(std::function<void(const Block*)> callback);
 };

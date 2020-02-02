@@ -21,7 +21,7 @@ public:
 	unsigned int streamReferenceCount = 0;
 	unsigned int* streamReferences = nullptr;
 
-	// Constructors
+	// Constructor
 	StreamIndex(FILE* file, unsigned long dataSize);
 
 	// Destructor

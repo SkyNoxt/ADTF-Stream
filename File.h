@@ -12,7 +12,7 @@
 #include "Extension/IndexAdd.h"
 #include "Extension/ReferencedFiles.h"
 
-#include "Sample.h"
+#include "Block.h"
 #include "Stream.h"
 
 class File
@@ -21,7 +21,7 @@ public:
 #pragma pack(push)
 #pragma pack(1)
 
-	class FileHeader
+	class Header
 	{
 	public:
 		// Member variables
@@ -46,14 +46,14 @@ public:
 		unsigned char description[1912];
 
 		// Constructors
-		FileHeader() = default;
-		FileHeader(FILE* file);
+		Header() = default;
+		Header(FILE* file);
 	};
 
 #pragma pack(pop)
 
 	// Member variables
-	FileHeader header;
+	Header header;
 
 	Extension<GUID> guid;
 	Extension<FileIndex> index;
@@ -64,7 +64,7 @@ public:
 	Stream* streams = nullptr;
 
 	// Member functions
-	Sample* read();
+	Block* read();
 	void seek(unsigned int entry);
 
 	// Constructor
