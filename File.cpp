@@ -44,6 +44,8 @@ File::File(const char* filePath)
 			currentStream->index = new Extension<StreamIndex>(&extensions[i], file);
 		else if (!strcmp("GUID", (char*)extensions[i].identifier))
 			new (&guid) Extension<GUID>(&extensions[i], file);
+		else if (!strcmp("marker_info", (char*)extensions[i].identifier))
+			new (&markerInfo) Extension<MarkerInfo>(&extensions[i], file);
 		else if (!strcmp("referencedfiles", (char*)extensions[i].identifier))
 			new (&referencedFiles) Extension<ReferencedFiles>(&extensions[i], file);
 	}

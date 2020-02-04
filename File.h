@@ -10,6 +10,7 @@
 #include "Extension/FileIndex.h"
 #include "Extension/GUID.h"
 #include "Extension/IndexAdd.h"
+#include "Extension/MarkerInfo.h"
 #include "Extension/ReferencedFiles.h"
 
 #include "Block.h"
@@ -57,6 +58,7 @@ public:
 	Extension<GUID> guid;
 	Extension<FileIndex> index;
 	Extension<IndexAdd> indexAdd;
+	Extension<MarkerInfo> markerInfo;
 	Extension<ReferencedFiles> referencedFiles;
 
 	unsigned short streamCount = 0;
