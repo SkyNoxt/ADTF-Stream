@@ -4,19 +4,16 @@
 void FileReader::start(std::function<void(const Block*)> callback)
 {
 	finished = false;
-	producer = new std::thread(&FileReader::produce, this);
-	consumer = new std::thread(&FileReader::consume, this, callback);
+	producer = std::thread(&FileReader::produce, this);
+	consumer = std::thread(&FileReader::consume, this, callback);
 }
 
 void FileReader::stop()
 {
 	finished = true;
 
-	producer->join();
-	consumer->join();
-
-	delete producer;
-	delete consumer;
+	producer.join();
+	consumer.join();
 }
 
 FileReader::FileReader(const char* file)
@@ -37,15 +34,13 @@ FileReader::~FileReader()
 
 void FileReader::produce()
 {
-	for (unsigned long i = 0; i < file->header.blockCount; ++i)
+	while (file->tell() < file->index.data->fileReferenceCount && !finished)
 	{
 		{
 			std::lock_guard<std::mutex> lock(mutex);
 			queue.push(file->read());
 		}
 		condition.notify_all();
-		if (finished)
-			break;
 	}
 	{
 		std::lock_guard<std::mutex> lock(mutex);

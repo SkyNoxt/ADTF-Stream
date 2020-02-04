@@ -32,8 +32,8 @@ private:
 	std::condition_variable condition;
 	std::queue<Block*> queue;
 
-	std::thread* producer = nullptr;
-	std::thread* consumer = nullptr;
+	std::thread producer;
+	std::thread consumer;
 
 	bool finished = true;
 

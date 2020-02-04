@@ -3,9 +3,6 @@
 
 #include <cstdio>
 
-#pragma pack(push)
-#pragma pack(1)
-
 class ReferencedFiles
 {
 public:
@@ -23,5 +20,3 @@ private:
 	// Member variable
 	char* data = nullptr;
 };
-
-#pragma pack(pop)
