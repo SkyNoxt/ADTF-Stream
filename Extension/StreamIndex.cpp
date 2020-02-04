@@ -3,18 +3,22 @@
 
 StreamIndex::StreamIndex(FILE* file, unsigned long dataSize)
 {
-	fread(this, 0x100, 1, file);
+	fread(&header, sizeof(Header) + sizeof(Descriptor), 1, file);
 
-	infoData = new unsigned char[infoDataSize];
-	fread(infoData, infoDataSize, 1, file);
+	codecSize = header.dataSize - sizeof(Descriptor);
+	if (codecSize)
+	{
+		codec = new unsigned char[codecSize];
+		fread(codec, codecSize, 1, file);
+	}
 
-	streamReferenceCount = (dataSize - 0x100 - infoDataSize) / sizeof(unsigned int);
-	streamReferences = new unsigned int[streamReferenceCount];
-	fread(streamReferences, sizeof(unsigned int), streamReferenceCount, file);
+	entryCount = (dataSize - (sizeof(Header) + sizeof(Descriptor) + codecSize)) / sizeof(unsigned int);
+	entries = new unsigned int[entryCount];
+	fread(entries, sizeof(unsigned int), entryCount, file);
 }
 
 StreamIndex::~StreamIndex()
 {
-	delete streamReferences;
-	delete infoData;
+	delete entries;
+	delete codec;
 }
