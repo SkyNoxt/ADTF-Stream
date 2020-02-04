@@ -2,9 +2,6 @@
 #pragma once
 
 #include <cstdio>
-#include <cstring>
-
-#include <new>
 
 #include "Extension/Extension.h"
 #include "Extension/FileIndex.h"
@@ -66,7 +63,8 @@ public:
 
 	// Member functions
 	Block* read();
-	void seek(unsigned int entry);
+	unsigned long tell();
+	void seek(unsigned long entry);
 
 	// Constructor
 	File(const char* filePath);
@@ -77,5 +75,6 @@ public:
 private:
 	// Member variables
 	FILE* file = nullptr;
+	unsigned long position = 0;
 	ExtensionHeader* extensions = nullptr;
 };

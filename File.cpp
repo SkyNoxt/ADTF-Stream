@@ -1,4 +1,7 @@
 
+#include <cstring>
+#include <new>
+
 #include "File.h"
 
 File::Header::Header(FILE* file)
@@ -8,12 +11,20 @@ File::Header::Header(FILE* file)
 
 Block* File::read()
 {
-	return new Block(file);
+	Block* block = new Block(file);
+	position = block->header.fileIndexEntry + 1;
+	return block;
 }
 
-void File::seek(unsigned int entry)
+unsigned long File::tell()
 {
-	fseek(file, index.data->fileReferences[entry].blockOffset, SEEK_SET);
+	return position;
+}
+
+void File::seek(unsigned long entry)
+{
+	position = entry;
+	fseek(file, index.data->fileReferences[position].blockOffset, SEEK_SET);
 }
 
 File::File(const char* filePath)
