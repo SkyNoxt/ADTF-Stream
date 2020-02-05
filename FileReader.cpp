@@ -1,19 +1,21 @@
 
 #include "FileReader.h"
 
-void FileReader::start(std::function<void(const Block*)> callback)
+void FileReader::start(std::function<void(const Block*)> blockCallback, std::function<void()> finishCallback)
 {
 	finished = false;
 	producer = std::thread(&FileReader::produce, this);
-	consumer = std::thread(&FileReader::consume, this, callback);
+	consumer = std::thread(&FileReader::consume, this, blockCallback, finishCallback);
 }
 
-void FileReader::stop()
+void FileReader::stop(bool finish)
 {
-	finished = true;
+	finished = finish;
 
-	producer.join();
-	consumer.join();
+	if (producer.joinable())
+		producer.join();
+	if (consumer.joinable())
+		consumer.join();
 }
 
 FileReader::FileReader(const char* file)
@@ -28,7 +30,7 @@ FileReader::FileReader(File* file)
 
 FileReader::~FileReader()
 {
-	stop();
+	stop(true);
 	delete file;
 }
 
@@ -49,7 +51,7 @@ void FileReader::produce()
 	condition.notify_all();
 }
 
-void FileReader::consume(std::function<void(const Block*)> callback)
+void FileReader::consume(std::function<void(const Block*)> blockCallback, std::function<void()> finishCallback)
 {
 	while (true)
 	{
@@ -57,11 +59,14 @@ void FileReader::consume(std::function<void(const Block*)> callback)
 		condition.wait(lock, [this] { return this->finished || !this->queue.empty(); });
 		while (!queue.empty())
 		{
-			callback(queue.front());
+			if (blockCallback)
+				blockCallback(queue.front());
 			delete queue.front();
 			queue.pop();
 		}
 		if (finished)
 			break;
 	}
+	if (finishCallback)
+		finishCallback();
 }

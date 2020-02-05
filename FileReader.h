@@ -16,8 +16,8 @@ public:
 	File* file = nullptr;
 
 	// Member functions
-	void start(std::function<void(const Block*)> callback);
-	void stop();
+	void start(std::function<void(const Block*)> blockCallback = nullptr, std::function<void()> finishCallback = nullptr);
+	void stop(bool finish);
 
 	// Constructors
 	FileReader(const char* file);
@@ -39,5 +39,5 @@ private:
 
 	// Member functions
 	void produce();
-	void consume(std::function<void(const Block*)> callback);
+	void consume(std::function<void(const Block*)> blockCallback, std::function<void()> finishCallback);
 };
