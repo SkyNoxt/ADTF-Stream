@@ -1,7 +1,5 @@
 
 # Declaration of variables
-CC = g++
-
 CC_FLAGS = -std=c++17 -flto -Ofast -fPIC -I . -Wall -Wno-unused-result
 LD_FLAGS = -shared -flto -Ofast -lpthread
 
@@ -13,11 +11,11 @@ OBJECTS = $(SOURCES:.cpp=.o)
 
 # Main target linking
 $(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) $(LD_FLAGS) -o $(TARGET)
+	$(CXX) $(OBJECTS) $(LD_FLAGS) -o $(TARGET)
 
 # Compile source files
 %.o: %.cpp
-	$(CC) -c $(CC_FLAGS) $< -o $@
+	$(CXX) -c $(CC_FLAGS) $< -o $@
 
 # Format code
 format:
