@@ -2,8 +2,8 @@
 # Declaration of variables
 CC = g++
 
-CC_FLAGS = -std=c++17 -flto -Ofast -I . -Wall -Wno-unused-result
-LD_FLAGS = -flto -Ofast -lpthread
+CC_FLAGS = -std=c++17 -flto -Ofast -fPIC -I . -Wall -Wno-unused-result
+LD_FLAGS = -shared -flto -Ofast -lpthread
 
 # File names
 TARGET = ADTF-Streaming.so
