@@ -2,6 +2,7 @@
 #pragma once
 
 #include <cstdio>
+#include <mutex>
 
 #include "Extension/Extension.h"
 #include "Extension/FileIndex.h"
@@ -74,6 +75,7 @@ public:
 
 private:
 	// Member variables
+	std::mutex mutex;
 	FILE* file = nullptr;
 	unsigned long entry = 0;
 	ExtensionHeader* extensions = nullptr;

@@ -11,6 +11,7 @@ File::Header::Header(FILE* file)
 
 Block* File::read()
 {
+	std::lock_guard<std::mutex> lock(mutex);
 	Block* block = new Block(file);
 	entry = block->header.fileIndexEntry + 1;
 	return block;
@@ -23,6 +24,8 @@ unsigned long File::tell()
 
 void File::seek(unsigned long position)
 {
+	std::lock_guard<std::mutex> lock(mutex);
+	entry = position;
 	fseek(file, index.data->entries[entry].blockOffset, SEEK_SET);
 }
 
