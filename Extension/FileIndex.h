@@ -8,7 +8,7 @@ class FileIndex
 public:
 #pragma pack(push, 1)
 
-	class FileIndexReference
+	class Entry
 	{
 	public:
 		// Member variables
@@ -25,8 +25,8 @@ public:
 #pragma pack(pop)
 
 	// Member variables
-	unsigned long fileReferenceCount = 0;
-	FileIndexReference* fileReferences = nullptr;
+	unsigned long entryCount = 0;
+	Entry* entries = nullptr;
 
 	// Constructors
 	FileIndex(FILE* file, unsigned long dataSize);

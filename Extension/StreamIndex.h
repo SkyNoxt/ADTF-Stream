@@ -12,7 +12,7 @@ public:
 	{
 	public:
 		// Member variables
-		unsigned long entryCount = 0;
+		unsigned long fileIndexEntryCount = 0;
 		unsigned long firstTime = 0;
 		unsigned long lastTime = 0;
 		unsigned int dataSize = 0;

@@ -12,19 +12,18 @@ File::Header::Header(FILE* file)
 Block* File::read()
 {
 	Block* block = new Block(file);
-	position = block->header.fileIndexEntry + 1;
+	entry = block->header.fileIndexEntry + 1;
 	return block;
 }
 
 unsigned long File::tell()
 {
-	return position;
+	return entry;
 }
 
-void File::seek(unsigned long entry)
+void File::seek(unsigned long position)
 {
-	position = entry;
-	fseek(file, index.data->fileReferences[position].blockOffset, SEEK_SET);
+	fseek(file, index.data->entries[entry].blockOffset, SEEK_SET);
 }
 
 File::File(const char* filePath)

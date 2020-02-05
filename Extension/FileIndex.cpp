@@ -3,12 +3,12 @@
 
 FileIndex::FileIndex(FILE* file, unsigned long dataSize)
 {
-	fileReferenceCount = dataSize / sizeof(FileIndexReference);
-	fileReferences = new FileIndexReference[fileReferenceCount];
-	fread(fileReferences, sizeof(FileIndexReference), fileReferenceCount, file);
+	entryCount = dataSize / sizeof(Entry);
+	entries = new Entry[entryCount];
+	fread(entries, sizeof(Entry), entryCount, file);
 }
 
 FileIndex::~FileIndex()
 {
-	delete fileReferences;
+	delete entries;
 }

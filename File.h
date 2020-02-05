@@ -64,7 +64,7 @@ public:
 	// Member functions
 	Block* read();
 	unsigned long tell();
-	void seek(unsigned long entry);
+	void seek(unsigned long position = 0);
 
 	// Constructor
 	File(const char* filePath);
@@ -75,6 +75,6 @@ public:
 private:
 	// Member variables
 	FILE* file = nullptr;
-	unsigned long position = 0;
+	unsigned long entry = 0;
 	ExtensionHeader* extensions = nullptr;
 };

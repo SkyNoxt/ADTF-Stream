@@ -34,7 +34,7 @@ FileReader::~FileReader()
 
 void FileReader::produce()
 {
-	while (file->tell() < file->index.data->fileReferenceCount && !finished)
+	while (file->tell() < file->index.data->entryCount && !finished)
 	{
 		{
 			std::lock_guard<std::mutex> lock(mutex);
