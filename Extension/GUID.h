@@ -3,15 +3,18 @@
 
 #include <cstdio>
 
-class GUID
+namespace ADTFStream
 {
-public:
-	// Member variable
-	char* guid = nullptr;
+	class GUID
+	{
+	  public:
+		// Member variable
+		char* guid = nullptr;
 
-	// Constructors
-	GUID(FILE* file, unsigned long dataSize);
+		// Constructors
+		GUID(FILE* file, unsigned long dataSize);
 
-	// Destructor
-	~GUID();
-};
+		// Destructor
+		~GUID();
+	};
+}

@@ -1,6 +1,8 @@
 
 #include "Block.h"
 
+using ADTFStream::Block;
+
 Block::Block(FILE* file)
 {
 	fread(&header, sizeof(Header), 1, file);

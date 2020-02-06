@@ -5,13 +5,16 @@
 #include "Extension/IndexAdd.h"
 #include "Extension/StreamIndex.h"
 
-class Stream
+namespace ADTFStream
 {
-public:
-	// Member variables
-	Extension<StreamIndex>* index = nullptr;
-	Extension<IndexAdd>* indexAdd = nullptr;
+	class Stream
+	{
+	  public:
+		// Member variables
+		Extension<StreamIndex>* index = nullptr;
+		Extension<IndexAdd>* indexAdd = nullptr;
 
-	// Destructor
-	~Stream();
-};
+		// Destructor
+		~Stream();
+	};
+}

@@ -1,6 +1,8 @@
 
 #include "FileIndex.h"
 
+using ADTFStream::FileIndex;
+
 FileIndex::FileIndex(FILE* file, unsigned long dataSize)
 {
 	entryCount = dataSize / sizeof(Entry);

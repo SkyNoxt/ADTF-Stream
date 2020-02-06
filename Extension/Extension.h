@@ -3,28 +3,31 @@
 
 #include "ExtensionHeader.h"
 
-template <class T>
-class Extension
+namespace ADTFStream
 {
-public:
-	// Member variables
-	ExtensionHeader* header = nullptr;
-	T* data;
-
-	// Constructors
-	Extension() = default;
-	Extension(ExtensionHeader* header, FILE* file)
-		: header(header)
+	template <class T>
+	class Extension
 	{
-		unsigned long offset = ftell(file);
-		fseek(file, header->dataOffset, SEEK_SET);
-		data = new T(file, header->dataSize);
-		fseek(file, offset, SEEK_SET);
-	}
+	  public:
+		// Member variables
+		ExtensionHeader* header = nullptr;
+		T* data;
 
-	// Destructor
-	~Extension()
-	{
-		delete data;
-	}
-};
+		// Constructors
+		Extension() = default;
+		Extension(ExtensionHeader* header, FILE* file)
+			: header(header)
+		{
+			unsigned long offset = ftell(file);
+			fseek(file, header->dataOffset, SEEK_SET);
+			data = new T(file, header->dataSize);
+			fseek(file, offset, SEEK_SET);
+		}
+
+		// Destructor
+		~Extension()
+		{
+			delete data;
+		}
+	};
+}

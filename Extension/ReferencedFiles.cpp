@@ -3,6 +3,8 @@
 
 #include "ReferencedFiles.h"
 
+using ADTFStream::ReferencedFiles;
+
 ReferencedFiles::ReferencedFiles(FILE* file, unsigned long dataSize)
 {
 	data = new char[dataSize];

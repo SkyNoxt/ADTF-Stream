@@ -3,15 +3,18 @@
 
 #include <cstdio>
 
-class MarkerInfo
+namespace ADTFStream
 {
-public:
-	// Member variables
-	char* markers = nullptr;
+	class MarkerInfo
+	{
+	  public:
+		// Member variables
+		char* markers = nullptr;
 
-	// Constructor
-	MarkerInfo(FILE* file, unsigned long dataSize);
+		// Constructor
+		MarkerInfo(FILE* file, unsigned long dataSize);
 
-	// Destructor
-	~MarkerInfo();
-};
+		// Destructor
+		~MarkerInfo();
+	};
+}

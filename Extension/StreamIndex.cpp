@@ -1,6 +1,8 @@
 
 #include "StreamIndex.h"
 
+using ADTFStream::StreamIndex;
+
 StreamIndex::StreamIndex(FILE* file, unsigned long dataSize)
 {
 	fread(&header, sizeof(Header) + sizeof(Descriptor), 1, file);

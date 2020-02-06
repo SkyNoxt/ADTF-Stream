@@ -3,20 +3,23 @@
 
 #include <cstdio>
 
-class ReferencedFiles
+namespace ADTFStream
 {
-public:
-	// Member variables
-	char* previous = nullptr;
-	char* next = nullptr;
+	class ReferencedFiles
+	{
+	  public:
+		// Member variables
+		char* previous = nullptr;
+		char* next = nullptr;
 
-	// Constructor
-	ReferencedFiles(FILE* file, unsigned long dataSize);
+		// Constructor
+		ReferencedFiles(FILE* file, unsigned long dataSize);
 
-	// Destructor
-	~ReferencedFiles();
+		// Destructor
+		~ReferencedFiles();
 
-private:
-	// Member variable
-	char* data = nullptr;
-};
+	  private:
+		// Member variable
+		char* data = nullptr;
+	};
+}

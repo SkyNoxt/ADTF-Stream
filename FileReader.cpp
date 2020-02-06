@@ -1,6 +1,8 @@
 
 #include "FileReader.h"
 
+using ADTFStream::FileReader;
+
 void FileReader::start(std::function<void(const Block*)> blockCallback, std::function<void()> finishCallback)
 {
 	finished = false;

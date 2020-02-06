@@ -1,15 +1,15 @@
 
 # Declaration of variables
-CXXFLAGS = -c -std=c++17 -flto -Ofast -fPIC -I . -Wall -Wno-unused-result
-LDFLAGS = -shared -flto -Ofast
+CXXFLAGS = -c -std=c++17 -flto -Ofast -I . -Wall -Wno-unused-result
+LDFLAGS = -shared -fPIC -flto -Ofast
 
 # File names
 HEADERS = $(shell find . -name "*.h")
 SOURCES = $(shell find . -name "*.cpp")
 OBJECTS = $(SOURCES:.cpp=.o)
 
-STATIC = libADTF-Streaming.a
-DYNAMIC = libADTF-Streaming.so
+STATIC = libADTFStream.a
+DYNAMIC = libADTFStream.so
 
 # Main target
 all: $(STATIC) $(DYNAMIC)

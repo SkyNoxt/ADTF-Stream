@@ -4,6 +4,9 @@
 
 #include "File.h"
 
+using ADTFStream::File;
+using ADTFStream::Block;
+
 File::Header::Header(FILE* file)
 {
 	fread(this, sizeof(Header), 1, file);
