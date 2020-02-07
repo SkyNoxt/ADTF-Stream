@@ -3,11 +3,11 @@
 
 #include <cstdio>
 
-namespace ADTFStream
+namespace ADTFStream::Extensions
 {
 #pragma pack(push, 1)
 
-	class ExtensionHeader
+	class Header
 	{
 	  public:
 		// Member variables
@@ -22,8 +22,8 @@ namespace ADTFStream
 		unsigned char reserved[96];
 
 		// Constructors
-		ExtensionHeader() = default;
-		ExtensionHeader(FILE* file);
+		Header() = default;
+		Header(FILE* file);
 	};
 
 #pragma pack(pop)

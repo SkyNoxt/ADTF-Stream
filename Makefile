@@ -1,7 +1,7 @@
 
 # Declaration of variables
-CXXFLAGS = -c -std=c++17 -flto -Ofast -I . -Wall -Wno-unused-result
-LDFLAGS = -shared -fPIC -flto -Ofast
+CXXFLAGS = -c -std=c++17 -flto -Ofast -fPIC -I . -Wall -Wno-unused-result
+LDFLAGS = -shared -flto -Ofast
 
 # File names
 HEADERS = $(shell find . -name "*.h")

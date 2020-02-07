@@ -1,7 +1,7 @@
 
 #include "MarkerInfo.h"
 
-using ADTFStream::MarkerInfo;
+using ADTFStream::Extensions::MarkerInfo;
 
 MarkerInfo::MarkerInfo(FILE* file, unsigned long dataSize)
 {

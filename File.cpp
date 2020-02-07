@@ -5,14 +5,13 @@
 #include "File.h"
 
 using ADTFStream::File;
-using ADTFStream::Block;
 
 File::Header::Header(FILE* file)
 {
 	fread(this, sizeof(Header), 1, file);
 }
 
-Block* File::read()
+ADTFStream::Block* File::read()
 {
 	std::lock_guard<std::mutex> lock(mutex);
 	Block* block = new Block(file);
@@ -38,8 +37,8 @@ File::File(const char* filePath)
 	header = Header(file);
 
 	fseek(file, header.extensionOffset, SEEK_SET);
-	extensions = new ExtensionHeader[header.extensionCount];
-	fread(extensions, sizeof(ExtensionHeader), header.extensionCount, file);
+	extensions = new Extensions::Header[header.extensionCount];
+	fread(extensions, sizeof(Extensions::Header), header.extensionCount, file);
 
 	for (unsigned long i = 0; i < header.extensionCount; ++i)
 		if (extensions[i].streamId > streamCount)

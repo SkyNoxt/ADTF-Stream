@@ -4,18 +4,25 @@
 #include <cstdio>
 #include <mutex>
 
-#include "Extension/Extension.h"
-#include "Extension/FileIndex.h"
-#include "Extension/GUID.h"
-#include "Extension/IndexAdd.h"
-#include "Extension/MarkerInfo.h"
-#include "Extension/ReferencedFiles.h"
+#include "Extensions/Extension.h"
+#include "Extensions/FileIndex.h"
+#include "Extensions/GUID.h"
+#include "Extensions/IndexAdd.h"
+#include "Extensions/MarkerInfo.h"
+#include "Extensions/ReferencedFiles.h"
 
 #include "Block.h"
 #include "Stream.h"
 
 namespace ADTFStream
 {
+	using Extensions::Extension;
+	using Extensions::FileIndex;
+	using Extensions::GUID;
+	using Extensions::IndexAdd;
+	using Extensions::MarkerInfo;
+	using Extensions::ReferencedFiles;
+
 	class File
 	{
 	  public:
@@ -80,6 +87,6 @@ namespace ADTFStream
 		std::mutex mutex;
 		FILE* file = nullptr;
 		unsigned long entry = 0;
-		ExtensionHeader* extensions = nullptr;
+		Extensions::Header* extensions = nullptr;
 	};
 }

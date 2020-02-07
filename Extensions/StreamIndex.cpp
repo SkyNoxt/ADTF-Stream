@@ -1,7 +1,7 @@
 
 #include "StreamIndex.h"
 
-using ADTFStream::StreamIndex;
+using ADTFStream::Extensions::StreamIndex;
 
 StreamIndex::StreamIndex(FILE* file, unsigned long dataSize)
 {

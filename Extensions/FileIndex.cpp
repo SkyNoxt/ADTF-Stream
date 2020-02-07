@@ -1,7 +1,7 @@
 
 #include "FileIndex.h"
 
-using ADTFStream::FileIndex;
+using ADTFStream::Extensions::FileIndex;
 
 FileIndex::FileIndex(FILE* file, unsigned long dataSize)
 {

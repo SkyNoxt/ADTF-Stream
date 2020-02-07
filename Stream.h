@@ -1,12 +1,16 @@
 
 #pragma once
 
-#include "Extension/Extension.h"
-#include "Extension/IndexAdd.h"
-#include "Extension/StreamIndex.h"
+#include "Extensions/Extension.h"
+#include "Extensions/IndexAdd.h"
+#include "Extensions/StreamIndex.h"
 
 namespace ADTFStream
 {
+	using Extensions::Extension;
+	using Extensions::IndexAdd;
+	using Extensions::StreamIndex;
+
 	class Stream
 	{
 	  public:

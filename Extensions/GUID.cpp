@@ -1,7 +1,7 @@
 
 #include "GUID.h"
 
-using ADTFStream::GUID;
+using ADTFStream::Extensions::GUID;
 
 GUID::GUID(FILE* file, unsigned long dataSize)
 {

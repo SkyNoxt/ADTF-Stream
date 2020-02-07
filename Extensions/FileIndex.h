@@ -3,7 +3,7 @@
 
 #include <cstdio>
 
-namespace ADTFStream
+namespace ADTFStream::Extensions
 {
 	class FileIndex
 	{

@@ -1,7 +1,7 @@
 
 #include "IndexAdd.h"
 
-using ADTFStream::IndexAdd;
+using ADTFStream::Extensions::IndexAdd;
 
 IndexAdd::IndexAdd(FILE* file, unsigned long dataSize)
 {

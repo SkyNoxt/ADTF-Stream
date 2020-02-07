@@ -1,21 +1,21 @@
 
 #pragma once
 
-#include "ExtensionHeader.h"
+#include "Header.h"
 
-namespace ADTFStream
+namespace ADTFStream::Extensions
 {
 	template <class T>
 	class Extension
 	{
 	  public:
 		// Member variables
-		ExtensionHeader* header = nullptr;
+		Header* header = nullptr;
 		T* data;
 
 		// Constructors
 		Extension() = default;
-		Extension(ExtensionHeader* header, FILE* file)
+		Extension(Header* header, FILE* file)
 			: header(header)
 		{
 			unsigned long offset = ftell(file);
