@@ -18,7 +18,7 @@ namespace ADTFStream::Extensions
 			unsigned long firstTime = 0;
 			unsigned long lastTime = 0;
 			unsigned int dataSize = 0;
-			unsigned char name[228];
+			char name[228];
 		};
 
 		class Descriptor

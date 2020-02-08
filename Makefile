@@ -16,10 +16,10 @@ all: $(STATIC) $(DYNAMIC)
 
 # Targets
 $(STATIC): $(OBJECTS)
-	$(AR) rc $(STATIC) $(OBJECTS)
+	$(AR) rc $@ $<
 
 $(DYNAMIC): $(OBJECTS)
-	$(CXX) $(OBJECTS) $(LDFLAGS) -o $(DYNAMIC)
+	$(CXX) $< $(LDFLAGS) -o $@
 
 # Compile source files
 %.o: %.cpp

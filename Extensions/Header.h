@@ -11,7 +11,7 @@ namespace ADTFStream::Extensions
 	{
 	  public:
 		// Member variables
-		unsigned char identifier[384];
+		char identifier[384];
 		unsigned short streamId = 0;
 		unsigned char reserved1[2];
 		unsigned int userId = 0;
