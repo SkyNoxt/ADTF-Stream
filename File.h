@@ -74,7 +74,7 @@ namespace ADTFStream
 		// Member functions
 		Block* read();
 		unsigned long tell();
-		void seek(unsigned long position = 0);
+		FileIndex::Entry* seek(unsigned long position = 0);
 
 		// Constructor
 		File(const char* filePath);

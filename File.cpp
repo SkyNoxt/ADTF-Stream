@@ -24,11 +24,13 @@ unsigned long File::tell()
 	return entry;
 }
 
-void File::seek(unsigned long position)
+ADTFStream::Extensions::FileIndex::Entry* File::seek(unsigned long position)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 	entry = position;
-	fseek(file, index.data->entries[entry].blockOffset, SEEK_SET);
+	FileIndex::Entry* seek = index.data->entries + entry;
+	fseek(file, seek->blockOffset, SEEK_SET);
+	return seek;
 }
 
 File::File(const char* filePath)
