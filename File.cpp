@@ -73,7 +73,7 @@ File::File(const char* filePath)
 File::~File()
 {
 	delete[] streams;
+	delete[] extensions;
 
-	delete extensions;
 	fclose(file);
 }

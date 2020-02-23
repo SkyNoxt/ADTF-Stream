@@ -11,7 +11,7 @@ namespace ADTFStream::Extensions
 	  public:
 		// Member variables
 		Header* header = nullptr;
-		T* data;
+		T* data = nullptr;
 
 		// Constructors
 		Extension() = default;
