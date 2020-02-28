@@ -13,7 +13,7 @@ namespace ADTFStream::Extensions
 		char* next = nullptr;
 
 		// Constructor
-		ReferencedFiles(FILE* file, unsigned long dataSize);
+		ReferencedFiles(FILE* file, unsigned long long dataSize);
 
 		// Destructor
 		~ReferencedFiles();

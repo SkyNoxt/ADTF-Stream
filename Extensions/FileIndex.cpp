@@ -3,7 +3,7 @@
 
 using ADTFStream::Extensions::FileIndex;
 
-FileIndex::FileIndex(FILE* file, unsigned long dataSize)
+FileIndex::FileIndex(FILE* file, unsigned long long dataSize)
 {
 	entryCount = dataSize / sizeof(Entry);
 	entries = new Entry[entryCount];

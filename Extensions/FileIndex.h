@@ -14,24 +14,24 @@ namespace ADTFStream::Extensions
 		{
 		  public:
 			// Member variables
-			unsigned long timeStamp = 0;
+			unsigned long long timeStamp = 0;
 			unsigned int size = 0;
 			unsigned short streamId = 0;
 			unsigned short flags = 0;
-			unsigned long blockOffset = 0;
-			unsigned long blockIndex = 0;
-			unsigned long streamIndex = 0;
+			unsigned long long blockOffset = 0;
+			unsigned long long blockIndex = 0;
+			unsigned long long streamIndex = 0;
 			unsigned int streamIndexEntry = 0;
 		};
 
 #pragma pack(pop)
 
 		// Member variables
-		unsigned long entryCount = 0;
+		unsigned long long entryCount = 0;
 		Entry* entries = nullptr;
 
 		// Constructors
-		FileIndex(FILE* file, unsigned long dataSize);
+		FileIndex(FILE* file, unsigned long long dataSize);
 
 		// Destructor
 		~FileIndex();

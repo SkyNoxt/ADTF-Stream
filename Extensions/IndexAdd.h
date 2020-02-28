@@ -11,12 +11,12 @@ namespace ADTFStream::Extensions
 	{
 	  public:
 		// Member variables
-		unsigned long streamIndexOffset = 0;
+		unsigned long long streamIndexOffset = 0;
 		unsigned int streamTableIndexOffset = 0;
 		unsigned char reserved[20];
 
 		// Constructor
-		IndexAdd(FILE* file, unsigned long dataSize);
+		IndexAdd(FILE* file, unsigned long long dataSize);
 	};
 
 #pragma pack(pop)

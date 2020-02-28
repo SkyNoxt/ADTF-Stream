@@ -19,12 +19,12 @@ ADTFStream::Block* File::read()
 	return block;
 }
 
-unsigned long File::tell()
+unsigned long long File::tell()
 {
 	return entry;
 }
 
-ADTFStream::Extensions::FileIndex::Entry* File::seek(unsigned long position)
+ADTFStream::Extensions::FileIndex::Entry* File::seek(unsigned long long position)
 {
 	std::lock_guard<std::mutex> lock(mutex);
 	entry = position;
@@ -42,14 +42,14 @@ File::File(const char* filePath)
 	extensions = new Extensions::Header[header.extensionCount];
 	fread(extensions, sizeof(Extensions::Header), header.extensionCount, file);
 
-	for (unsigned long i = 0; i < header.extensionCount; ++i)
+	for (unsigned long long i = 0; i < header.extensionCount; ++i)
 		if (extensions[i].streamId > streamCount)
 			streamCount = extensions[i].streamId;
 
 	streams = new Stream[streamCount];
 	Stream* currentStream = streams;
 
-	for (unsigned long i = 0; i < header.extensionCount; ++i)
+	for (unsigned long long i = 0; i < header.extensionCount; ++i)
 	{
 		if (!strcmp("index_add0", (char*)extensions[i].identifier))
 			new (&indexAdd) Extension<IndexAdd>(&extensions[i], file);

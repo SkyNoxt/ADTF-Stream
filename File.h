@@ -36,19 +36,19 @@ namespace ADTFStream
 			unsigned int versionId = 0;
 			unsigned int flags = 0;
 			unsigned int extensionCount = 0;
-			unsigned long extensionOffset = 0;
-			unsigned long dataOffset = 0;
-			unsigned long dataSize = 0;
-			unsigned long blockCount = 0;
-			unsigned long maxBlockSize = 0;
-			unsigned long duration = 0;
-			unsigned long fileTime = 0;
+			unsigned long long extensionOffset = 0;
+			unsigned long long dataOffset = 0;
+			unsigned long long dataSize = 0;
+			unsigned long long blockCount = 0;
+			unsigned long long maxBlockSize = 0;
+			unsigned long long duration = 0;
+			unsigned long long fileTime = 0;
 			unsigned char headerByteOrder = 0;
-			unsigned long timeOffset = 0;
+			unsigned long long timeOffset = 0;
 			unsigned char patchNumber = 0;
-			unsigned long firstBlockOffset = 0;
-			unsigned long continuousOffset = 0;
-			unsigned long ringBufferEndOffset = 0;
+			unsigned long long firstBlockOffset = 0;
+			unsigned long long continuousOffset = 0;
+			unsigned long long ringBufferEndOffset = 0;
 			unsigned char reserved[30];
 			char description[1912];
 
@@ -73,8 +73,8 @@ namespace ADTFStream
 
 		// Member functions
 		Block* read();
-		unsigned long tell();
-		FileIndex::Entry* seek(unsigned long position = 0);
+		unsigned long long tell();
+		FileIndex::Entry* seek(unsigned long long position = 0);
 
 		// Constructor
 		File(const char* filePath);
@@ -86,7 +86,7 @@ namespace ADTFStream
 		// Member variables
 		std::mutex mutex;
 		FILE* file = nullptr;
-		unsigned long entry = 0;
+		unsigned long long entry = 0;
 		Extensions::Header* extensions = nullptr;
 	};
 }

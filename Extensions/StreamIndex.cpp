@@ -3,7 +3,7 @@
 
 using ADTFStream::Extensions::StreamIndex;
 
-StreamIndex::StreamIndex(FILE* file, unsigned long dataSize)
+StreamIndex::StreamIndex(FILE* file, unsigned long long dataSize)
 {
 	fread(&header, sizeof(Header) + sizeof(Descriptor), 1, file);
 

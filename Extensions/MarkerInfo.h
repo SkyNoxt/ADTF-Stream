@@ -12,7 +12,7 @@ namespace ADTFStream::Extensions
 		char* markers = nullptr;
 
 		// Constructor
-		MarkerInfo(FILE* file, unsigned long dataSize);
+		MarkerInfo(FILE* file, unsigned long long dataSize);
 
 		// Destructor
 		~MarkerInfo();
