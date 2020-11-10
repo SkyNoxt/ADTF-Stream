@@ -1,4 +1,7 @@
 
 *.o
+*.obj
 *.a
+*.lib
 *.so
+*.dll

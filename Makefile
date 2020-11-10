@@ -1,15 +1,29 @@
 
 # Declaration of variables
-CXXFLAGS = -c -std=c++17 -flto -Ofast -fPIC -I . -Wall -Wno-unused-result
-LDFLAGS = -shared -flto -Ofast
+CXXFLAGS = -c -std=c++17 -Ofast -I . -Wall
+LDFLAGS = -shared -Ofast
+LIBRARY = libADTFStream
+
+ifdef OS
+	CXXFLAGS += -Wno-deprecated-declarations
+	STAEX = lib
+	DYNEX = dll
+	OBJEX = obj
+else
+	CXXFLAGS += -flto -fPIC -Wno-unused-result
+	LDFLAGS += -flto
+	STAEX = a
+	DYNEX = so
+	OBJEX = o
+endif
 
 # File names
 HEADERS = $(shell find . -name "*.h")
 SOURCES = $(shell find . -name "*.cpp")
-OBJECTS = $(SOURCES:.cpp=.o)
+OBJECTS = $(SOURCES:.cpp=.$(OBJEX))
 
-STATIC = libADTFStream.a
-DYNAMIC = libADTFStream.so
+STATIC = $(LIBRARY).$(STAEX)
+DYNAMIC = $(LIBRARY).$(DYNEX)
 
 # Main target
 all: $(STATIC) $(DYNAMIC)
@@ -22,7 +36,7 @@ $(DYNAMIC): $(OBJECTS)
 	$(CXX) $^ $(LDFLAGS) -o $@
 
 # Compile source files
-%.o: %.cpp
+%.$(OBJEX): %.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 # Format code
