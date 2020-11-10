@@ -8,7 +8,7 @@ StreamIndex::StreamIndex(FILE* file, unsigned long long dataSize)
 	fread(&header, sizeof(Header) + sizeof(Descriptor), 1, file);
 
 	codecSize = header.dataSize - sizeof(Descriptor);
-	if (codecSize)
+	if(codecSize)
 	{
 		codec = new unsigned char[codecSize];
 		fread(codec, codecSize, 1, file);

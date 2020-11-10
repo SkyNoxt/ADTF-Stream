@@ -14,9 +14,9 @@ void FileReader::stop(bool finish)
 {
 	finished = finish;
 
-	if (producer.joinable())
+	if(producer.joinable())
 		producer.join();
-	if (consumer.joinable())
+	if(consumer.joinable())
 		consumer.join();
 }
 
@@ -38,7 +38,7 @@ FileReader::~FileReader()
 
 void FileReader::produce()
 {
-	while (file->tell() < file->index.data->entryCount && !finished)
+	while(file->tell() < file->index.data->entryCount && !finished)
 	{
 		{
 			std::lock_guard<std::mutex> lock(mutex);
@@ -55,20 +55,20 @@ void FileReader::produce()
 
 void FileReader::consume(std::function<void(const Block*)> blockCallback, std::function<void()> finishCallback)
 {
-	while (true)
+	while(true)
 	{
 		std::unique_lock<std::mutex> lock(mutex);
 		condition.wait(lock, [this] { return this->finished || !this->queue.empty(); });
-		while (!queue.empty())
+		while(!queue.empty())
 		{
-			if (blockCallback)
+			if(blockCallback)
 				blockCallback(queue.front());
 			delete queue.front();
 			queue.pop();
 		}
-		if (finished)
+		if(finished)
 			break;
 	}
-	if (finishCallback)
+	if(finishCallback)
 		finishCallback();
 }
