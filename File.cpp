@@ -14,21 +14,21 @@ File::Header::Header(FILE* file)
 ADTFStream::Block* File::read()
 {
 	std::lock_guard<std::mutex> lock(mutex);
-	Block* block = new Block(file);
-	entry = block->header.fileIndexEntry + 1;
-	return block;
+	Block* read = new Block(file);
+	++block;
+	return read;
 }
 
 unsigned long long File::tell()
 {
-	return entry;
+	return block;
 }
 
 ADTFStream::Extensions::FileIndex::Entry* File::seek(unsigned long long position)
 {
 	std::lock_guard<std::mutex> lock(mutex);
-	entry = position;
-	FileIndex::Entry* seek = index.data->entries + entry;
+	FileIndex::Entry* seek = index.data->entries + index.data->entryCount * position / header.blockCount;
+	block = seek->blockIndex;
 	fseek(file, seek->blockOffset, SEEK_SET);
 	return seek;
 }

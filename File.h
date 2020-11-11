@@ -86,7 +86,7 @@ namespace ADTFStream
 		// Member variables
 		std::mutex mutex;
 		FILE* file = nullptr;
-		unsigned long long entry = 0;
+		unsigned long long block = 0;
 		Extensions::Header* extensions = nullptr;
 	};
 }
