@@ -36,7 +36,7 @@ $(DYNAMIC): $(OBJECTS)
 	$(CXX) $^ $(LDFLAGS) -o $@
 
 # Compile source files
-%.$(OBJEX): %.cpp
+%.$(OBJEX): %.cpp %.h
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 # Format code
