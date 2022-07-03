@@ -49,8 +49,8 @@ namespace ADTFStream
 			unsigned long long firstBlockOffset = 0;
 			unsigned long long continuousOffset = 0;
 			unsigned long long ringBufferEndOffset = 0;
-			unsigned char reserved[30];
-			char description[1912];
+			unsigned char reserved[30] = { 0 };
+			char description[1912] = { 0 };
 
 			// Constructors
 			Header() = default;
@@ -60,13 +60,13 @@ namespace ADTFStream
 #pragma pack(pop)
 
 		// Member variables
-		Header header;
+		Header header = { 0 };
 
-		Extension<GUID> guid;
-		Extension<FileIndex> index;
-		Extension<IndexAdd> indexAdd;
-		Extension<MarkerInfo> markerInfo;
-		Extension<ReferencedFiles> referencedFiles;
+		Extension<GUID> guid = {};
+		Extension<FileIndex> index = {};
+		Extension<IndexAdd> indexAdd = {};
+		Extension<MarkerInfo> markerInfo = {};
+		Extension<ReferencedFiles> referencedFiles = {};
 
 		unsigned short streamCount = 0;
 		Stream* streams = nullptr;
@@ -84,8 +84,8 @@ namespace ADTFStream
 
 	  private:
 		// Member variables
-		std::mutex mutex;
 		FILE* file = nullptr;
+		std::mutex mutex = {};
 		unsigned long long block = 0;
 		Extensions::Header* extensions = nullptr;
 	};

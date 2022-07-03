@@ -13,7 +13,7 @@ namespace ADTFStream::Extensions
 		// Member variables
 		unsigned long long streamIndexOffset = 0;
 		unsigned int streamTableIndexOffset = 0;
-		unsigned char reserved[20];
+		unsigned char reserved[20] = { 0 };
 
 		// Constructor
 		IndexAdd(FILE* file, unsigned long long dataSize);

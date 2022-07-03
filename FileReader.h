@@ -30,12 +30,12 @@ namespace ADTFStream
 
 	  private:
 		// Member variables
-		std::mutex mutex;
-		std::condition_variable condition;
-		std::queue<Block*> queue;
+		std::mutex mutex = {};
+		std::condition_variable condition = {};
+		std::queue<Block*> queue = {};
 
-		std::thread producer;
-		std::thread consumer;
+		std::thread producer = {};
+		std::thread consumer = {};
 
 		bool finished = true;
 
