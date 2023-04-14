@@ -2,7 +2,12 @@
 #pragma once
 
 #include <cstdio>
+
+#include <condition_variable>
+#include <functional>
 #include <mutex>
+#include <queue>
+#include <thread>
 
 #include "Extensions/Extension.h"
 #include "Extensions/FileIndex.h"
@@ -60,7 +65,7 @@ namespace ADTFStream
 #pragma pack(pop)
 
 		// Member variables
-		Header header = { 0 };
+		Header header = {};
 
 		Extension<GUID> guid = {};
 		Extension<FileIndex> index = {};
@@ -82,10 +87,43 @@ namespace ADTFStream
 		// Destructor
 		~File();
 
+		// Inner class
+		class Reader
+		{
+		  public:
+			// Member variables
+			File* file = nullptr;
+
+			// Member functions
+			void start(std::function<void(const Block*)> blockCallback = nullptr, std::function<void()> finishCallback = nullptr);
+			void stop(bool finish);
+
+			// Constructors
+			Reader(const char* file);
+			Reader(File* file);
+
+			// Destructor
+			~Reader();
+
+		  private:
+			// Member variables
+			std::mutex mutex = {};
+			std::condition_variable condition = {};
+			std::queue<Block*> queue = {};
+
+			std::thread producer = {};
+			std::thread consumer = {};
+
+			bool finished = true;
+
+			// Member functions
+			void produce();
+			void consume(std::function<void(const Block*)> blockCallback, std::function<void()> finishCallback);
+		};
+
 	  private:
 		// Member variables
 		FILE* file = nullptr;
-		std::mutex mutex = {};
 		unsigned long long block = 0;
 		Extensions::Header* extensions = nullptr;
 	};

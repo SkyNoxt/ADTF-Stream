@@ -1,5 +1,6 @@
 
 #include <cstring>
+
 #include <new>
 
 #include "File.h"
@@ -13,7 +14,6 @@ File::Header::Header(FILE* file)
 
 ADTFStream::Block* File::read()
 {
-	std::lock_guard<std::mutex> lock(mutex);
 	Block* read = new Block(file);
 	++block;
 	return read;
@@ -26,7 +26,6 @@ unsigned long long File::tell()
 
 ADTFStream::Extensions::FileIndex::Entry* File::seek(unsigned long long position)
 {
-	std::lock_guard<std::mutex> lock(mutex);
 	FileIndex::Entry* seek = index.data->entries + index.data->entryCount * position / header.blockCount;
 	block = seek->blockIndex;
 	fseek(file, seek->blockOffset, SEEK_SET);
@@ -76,4 +75,75 @@ File::~File()
 	delete[] extensions;
 
 	fclose(file);
+}
+
+void File::Reader::start(std::function<void(const Block*)> blockCallback, std::function<void()> finishCallback)
+{
+	finished = false;
+	producer = std::thread(&Reader::produce, this);
+	consumer = std::thread(&Reader::consume, this, blockCallback, finishCallback);
+}
+
+void File::Reader::stop(bool finish)
+{
+	finished = finish;
+
+	if(producer.joinable())
+		producer.join();
+	if(consumer.joinable())
+		consumer.join();
+}
+
+File::Reader::Reader(const char* file)
+	: file(new File(file))
+{
+}
+
+File::Reader::Reader(File* file)
+	: file(file)
+{
+}
+
+File::Reader::~Reader()
+{
+	stop(true);
+	delete file;
+}
+
+void File::Reader::produce()
+{
+	while(file->tell() < file->header.blockCount && !finished)
+	{
+		{
+			std::lock_guard<std::mutex> lock(mutex);
+			queue.push(file->read());
+		}
+		condition.notify_one();
+	}
+	{
+		std::lock_guard<std::mutex> lock(mutex);
+		finished = true;
+	}
+	condition.notify_one();
+}
+
+void File::Reader::consume(std::function<void(const Block*)> blockCallback, std::function<void()> finishCallback)
+{
+	while(true)
+	{
+		std::unique_lock<std::mutex> lock(mutex);
+		condition.wait(lock, [this]
+					   { return this->finished || !this->queue.empty(); });
+		while(!queue.empty())
+		{
+			if(blockCallback)
+				blockCallback(queue.front());
+			delete queue.front();
+			queue.pop();
+		}
+		if(finished)
+			break;
+	}
+	if(finishCallback)
+		finishCallback();
 }
