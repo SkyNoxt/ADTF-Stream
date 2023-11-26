@@ -1,6 +1,6 @@
 
 # Declaration of variables
-CXXFLAGS = -c -std=c++17 -Ofast -I . -Wall
+CXXFLAGS = -c -std=c++17 -Ofast -Wall
 LDFLAGS = -shared -Ofast
 LIBRARY = libADTFStream
 
