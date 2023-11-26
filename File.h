@@ -9,10 +9,8 @@
 #include <queue>
 #include <thread>
 
-#include "Extensions/Extension.h"
 #include "Extensions/FileIndex.h"
 #include "Extensions/GUID.h"
-#include "Extensions/IndexAdd.h"
 #include "Extensions/MarkerInfo.h"
 #include "Extensions/ReferencedFiles.h"
 
@@ -21,10 +19,8 @@
 
 namespace ADTFStream
 {
-	using Extensions::Extension;
 	using Extensions::FileIndex;
 	using Extensions::GUID;
-	using Extensions::IndexAdd;
 	using Extensions::MarkerInfo;
 	using Extensions::ReferencedFiles;
 
