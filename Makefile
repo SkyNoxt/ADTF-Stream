@@ -1,17 +1,18 @@
 
 # Declaration of variables
-CXXFLAGS = -c -std=c++17 -Ofast -Wall
-LDFLAGS = -shared -Ofast
+CXXFLAGS = -c -std=c++17 -Wall -Werror
+LDFLAGS = -shared
+
 LIBRARY = libADTFStream
 
 ifdef OS
 	CXXFLAGS += -Wno-deprecated-declarations
+	LDFLAGS += -fuse-ld=lld
 	STAEX = lib
 	DYNEX = dll
 	OBJEX = obj
 else
-	CXXFLAGS += -flto -fPIC -Wno-unused-result
-	LDFLAGS += -flto
+	CXXFLAGS += -fPIC -Wno-unused-result
 	STAEX = a
 	DYNEX = so
 	OBJEX = o
@@ -25,10 +26,18 @@ OBJECTS = $(SOURCES:.cpp=.$(OBJEX))
 STATIC = $(LIBRARY).$(STAEX)
 DYNAMIC = $(LIBRARY).$(DYNEX)
 
-# Main target
-all: $(STATIC) $(DYNAMIC)
-
 # Targets
+
+all: release
+
+debug: CXXFLAGS += -g
+debug: $(STATIC) $(DYNAMIC)
+
+release: CXXFLAGS += -Ofast -flto
+release: LDFLAGS += -Ofast
+release: $(STATIC) $(DYNAMIC)
+
+# Link main targets
 $(STATIC): $(OBJECTS)
 	$(AR) rc $@ $^
 
@@ -36,7 +45,7 @@ $(DYNAMIC): $(OBJECTS)
 	$(CXX) $^ $(LDFLAGS) -o $@
 
 # Compile source files
-%.$(OBJEX): %.cpp %.h
+%.$(OBJEX): %.cpp %.h Makefile
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 # Format code
