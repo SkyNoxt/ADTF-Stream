@@ -31,7 +31,7 @@ namespace ADTFStream
 #pragma pack(pop)
 
 		// Member variables
-		Header header = { 0 };
+		Header header = {};
 		unsigned char* data = nullptr;
 
 		// Constructor

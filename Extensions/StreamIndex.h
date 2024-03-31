@@ -18,15 +18,15 @@ namespace ADTFStream::Extensions
 			unsigned long long firstTime = 0;
 			unsigned long long lastTime = 0;
 			unsigned int dataSize = 0;
-			char name[228] = { 0 };
+			char name[228] = {};
 		};
 
 		class Descriptor
 		{
 		  public:
 			// Member variables
-			char sampleType[512] = { 0 };
-			char mediaType[512] = { 0 };
+			char sampleType[512] = {};
+			char mediaType[512] = {};
 			unsigned int majorType = 0;
 			unsigned int minorType = 0;
 			unsigned int flags = 0;
@@ -35,8 +35,8 @@ namespace ADTFStream::Extensions
 #pragma pack(pop)
 
 		// Member variables
-		Header header = { 0 };
-		Descriptor descriptor = { 0 };
+		Header header = {};
+		Descriptor descriptor = {};
 		unsigned int codecSize = 0;
 		unsigned char* codec = nullptr;
 

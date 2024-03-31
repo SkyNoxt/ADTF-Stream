@@ -50,8 +50,8 @@ namespace ADTFStream
 			unsigned long long firstBlockOffset = 0;
 			unsigned long long continuousOffset = 0;
 			unsigned long long ringBufferEndOffset = 0;
-			unsigned char reserved[30] = { 0 };
-			char description[1912] = { 0 };
+			unsigned char reserved[30] = {};
+			char description[1912] = {};
 
 			// Constructors
 			Header() = default;
