@@ -39,7 +39,7 @@ release: $(STATIC) $(DYNAMIC)
 
 # Link main targets
 $(STATIC): $(OBJECTS)
-	$(AR) rc $@ $^
+	$(AR) rcs $@ $^
 
 $(DYNAMIC): $(OBJECTS)
 	$(CXX) $^ $(LDFLAGS) -o $@
