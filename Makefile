@@ -6,16 +6,17 @@ LDFLAGS = -shared
 LIBRARY = libADTFStream
 
 ifdef OS
-	CXXFLAGS += -Wno-deprecated-declarations
-	LDFLAGS += -fuse-ld=lld
+	OBJEX = obj
 	STAEX = lib
 	DYNEX = dll
-	OBJEX = obj
+	CXXFLAGS += -Wno-deprecated-declarations
+	LDFLAGS += -fuse-ld=lld -Wl,-def:ADTFStream.def,$\
+								-implib:$(LIBRARY).$(DYNEX).$(STAEX)
 else
-	CXXFLAGS += -fPIC -Wno-unused-result
+	OBJEX = o
 	STAEX = a
 	DYNEX = so
-	OBJEX = o
+	CXXFLAGS += -fPIC -Wno-unused-result
 endif
 
 # File names
@@ -54,4 +55,4 @@ format:
 
 # Clean generated files
 clean:
-	$(RM) $(STATIC) $(DYNAMIC) $(OBJECTS)
+	$(RM) $(LIBRARY)* $(OBJECTS)
