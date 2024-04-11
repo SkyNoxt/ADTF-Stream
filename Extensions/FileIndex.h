@@ -10,6 +10,7 @@ namespace ADTFStream::Extensions
 	  public:
 #pragma pack(push, 1)
 
+		// Inner class
 		class Entry
 		{
 		  public:
@@ -30,7 +31,7 @@ namespace ADTFStream::Extensions
 		unsigned long long entryCount = 0;
 		Entry* entries = nullptr;
 
-		// Constructors
+		// Constructor
 		FileIndex(FILE* file, unsigned long long dataSize);
 
 		// Destructor

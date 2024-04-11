@@ -8,7 +8,7 @@ namespace ADTFStream::Extensions
 	class MarkerInfo
 	{
 	  public:
-		// Member variables
+		// Member variable
 		char* markers = nullptr;
 
 		// Constructor

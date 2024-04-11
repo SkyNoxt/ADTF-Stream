@@ -10,6 +10,7 @@ namespace ADTFStream::Extensions
 	  public:
 #pragma pack(push, 1)
 
+		// Inner class
 		class Header
 		{
 		  public:
@@ -21,6 +22,7 @@ namespace ADTFStream::Extensions
 			char name[228] = {};
 		};
 
+		// Inner class
 		class Descriptor
 		{
 		  public:

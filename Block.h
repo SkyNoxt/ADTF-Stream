@@ -10,6 +10,7 @@ namespace ADTFStream
 	  public:
 #pragma pack(push, 1)
 
+		// Inner class
 		class Header
 		{
 		  public:

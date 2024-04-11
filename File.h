@@ -29,6 +29,7 @@ namespace ADTFStream
 	  public:
 #pragma pack(push, 1)
 
+		// Inner class
 		class Header
 		{
 		  public:
@@ -72,13 +73,13 @@ namespace ADTFStream
 		unsigned short streamCount = 0;
 		Stream* streams = nullptr;
 
+		// Constructor
+		File(const char* filePath);
+
 		// Member functions
 		Block* read();
 		unsigned long long tell();
 		FileIndex::Entry* seek(unsigned long long position = 0);
-
-		// Constructor
-		File(const char* filePath);
 
 		// Destructor
 		~File();
@@ -87,16 +88,16 @@ namespace ADTFStream
 		class Reader
 		{
 		  public:
-			// Member variables
+			// Member variable
 			File* file = nullptr;
-
-			// Member functions
-			void start(std::function<void(const Block*)> blockCallback = nullptr, std::function<void()> finishCallback = nullptr);
-			void stop(bool finish);
 
 			// Constructors
 			Reader(const char* file);
 			Reader(File* file);
+
+			// Member functions
+			void start(std::function<void(const Block*)> blockCallback = nullptr, std::function<void()> finishCallback = nullptr);
+			void stop(bool finish);
 
 			// Destructor
 			~Reader();

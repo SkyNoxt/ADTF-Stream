@@ -11,7 +11,7 @@ namespace ADTFStream::Extensions
 		// Member variable
 		char* guid = nullptr;
 
-		// Constructors
+		// Constructor
 		GUID(FILE* file, unsigned long long dataSize);
 
 		// Destructor
