@@ -1,15 +1,14 @@
 
 #include <cstring>
 
-#include <new>
-
+#include "IO.h"
 #include "File.h"
 
 using ADTFStream::File;
 
 File::Header::Header(FILE* file)
 {
-	fread(this, sizeof(Header), 1, file);
+	IO::read(this, sizeof(Header), 1, file);
 }
 
 void File::Reader::start(std::function<void(const Block*)> blockCallback, std::function<void()> finishCallback)
@@ -99,18 +98,18 @@ ADTFStream::Extensions::FileIndex::Entry* File::seek(unsigned long long position
 {
 	FileIndex::Entry* seek = index.data->entries + index.data->entryCount * position / header.blockCount;
 	block = seek->blockIndex;
-	fseek(file, seek->blockOffset, SEEK_SET);
+	IO::seek(file, seek->blockOffset, SEEK_SET);
 	return seek;
 }
 
 File::File(const char* filePath)
-	: file(fopen(filePath, "rb"))
 {
+	IO::open(&file, filePath, "rb");
 	header = Header(file);
 
-	fseek(file, header.extensionOffset, SEEK_SET);
+	IO::seek(file, header.extensionOffset, SEEK_SET);
 	extensions = new Extensions::Header[header.extensionCount];
-	fread(extensions, sizeof(Extensions::Header), header.extensionCount, file);
+	IO::read(extensions, sizeof(Extensions::Header), header.extensionCount, file);
 
 	for(unsigned long long i = 0; i < header.extensionCount; ++i)
 		if(extensions[i].streamId > streamCount)
@@ -137,7 +136,7 @@ File::File(const char* filePath)
 			new(&referencedFiles) Extension<ReferencedFiles>(&extensions[i], file);
 	}
 
-	fseek(file, header.firstBlockOffset, SEEK_SET);
+	IO::seek(file, header.firstBlockOffset, SEEK_SET);
 }
 
 File::~File()
@@ -145,5 +144,5 @@ File::~File()
 	delete[] streams;
 	delete[] extensions;
 
-	fclose(file);
+	IO::close(file);
 }

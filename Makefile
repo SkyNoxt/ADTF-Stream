@@ -9,14 +9,13 @@ ifdef OS
 	OBJEX = obj
 	STAEX = lib
 	DYNEX = dll
-	CXXFLAGS += -Wno-deprecated-declarations
 	LDFLAGS += -fuse-ld=lld -Wl,-def:ADTFStream.def,$\
-								-implib:$(LIBRARY).$(DYNEX).$(STAEX)
+		-implib:$(LIBRARY).$(DYNEX).$(STAEX)
 else
 	OBJEX = o
 	STAEX = a
 	DYNEX = so
-	CXXFLAGS += -fPIC -Wno-unused-result
+	CXXFLAGS += -fPIC
 endif
 
 # File names

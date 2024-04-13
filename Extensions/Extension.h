@@ -3,6 +3,12 @@
 
 #include "Header.h"
 
+namespace ADTFStream::IO
+{
+	void seek(FILE* stream, long long int offset, int origin);
+	unsigned long long tell(FILE* stream);
+}
+
 namespace ADTFStream::Extensions
 {
 	template <class T>
@@ -18,10 +24,10 @@ namespace ADTFStream::Extensions
 		Extension(Header* header, FILE* file)
 			: header(header)
 		{
-			unsigned long long offset = ftell(file);
-			fseek(file, header->dataOffset, SEEK_SET);
+			unsigned long long offset = IO::tell(file);
+			IO::seek(file, header->dataOffset, SEEK_SET);
 			data = new T(file, header->dataSize);
-			fseek(file, offset, SEEK_SET);
+			IO::seek(file, offset, SEEK_SET);
 		}
 
 		// Destructor

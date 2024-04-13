@@ -1,16 +1,23 @@
 
 #include "Block.h"
 
+namespace ADTFStream::IO
+{
+	unsigned long long read(void* buffer, unsigned long long size, unsigned long long count, FILE* stream);
+	void seek(FILE* stream, long long int offset, int origin);
+	unsigned long long tell(FILE* stream);
+}
+
 using ADTFStream::Block;
 
 Block::Block(FILE* file)
 {
-	fread(&header, sizeof(Header), 1, file);
+	IO::read(&header, sizeof(Header), 1, file);
 	data = new unsigned char[header.sampleSize];
-	fread(data, header.sampleSize, 1, file);
+	IO::read(data, header.sampleSize, 1, file);
 
-	unsigned char position = (ftell(file) + 5) & 0x0f;
-	position ? fseek(file, 0x10 - position + 5, SEEK_CUR) : fseek(file, 5, SEEK_CUR);
+	unsigned char position = (IO::tell(file) + 5) & 0x0f;
+	position ? IO::seek(file, 0x10 - position + 5, SEEK_CUR) : IO::seek(file, 5, SEEK_CUR);
 }
 
 Block::~Block()
