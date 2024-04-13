@@ -61,29 +61,6 @@ namespace ADTFStream
 
 #pragma pack(pop)
 
-		// Member variables
-		Header header = {};
-
-		Extension<GUID> guid = {};
-		Extension<FileIndex> index = {};
-		Extension<IndexAdd> indexAdd = {};
-		Extension<MarkerInfo> markerInfo = {};
-		Extension<ReferencedFiles> referencedFiles = {};
-
-		unsigned short streamCount = 0;
-		Stream* streams = nullptr;
-
-		// Constructor
-		File(const char* filePath);
-
-		// Member functions
-		Block* read();
-		unsigned long long tell();
-		FileIndex::Entry* seek(unsigned long long position = 0);
-
-		// Destructor
-		~File();
-
 		// Inner class
 		class Reader
 		{
@@ -117,6 +94,29 @@ namespace ADTFStream
 			void produce();
 			void consume(std::function<void(const Block*)> blockCallback, std::function<void()> finishCallback);
 		};
+
+		// Member variables
+		Header header = {};
+
+		Extension<GUID> guid = {};
+		Extension<FileIndex> index = {};
+		Extension<IndexAdd> indexAdd = {};
+		Extension<MarkerInfo> markerInfo = {};
+		Extension<ReferencedFiles> referencedFiles = {};
+
+		unsigned short streamCount = 0;
+		Stream* streams = nullptr;
+
+		// Constructor
+		File(const char* filePath);
+
+		// Member functions
+		Block* read();
+		unsigned long long tell();
+		FileIndex::Entry* seek(unsigned long long position = 0);
+
+		// Destructor
+		~File();
 
 	  private:
 		// Member variables

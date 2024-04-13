@@ -3,16 +3,12 @@
 
 #include <cstdio>
 
-namespace ADTFStream
+namespace ADTFStream::IO
 {
-	class IO
-	{
-	  public:
-		// Static functions
-		static void open(FILE** stream, const char* name, const char* mode);
-		static unsigned long long read(void* buffer, unsigned long long size, unsigned long long count, FILE* stream);
-		static void seek(FILE* stream, long long int offset, int origin);
-		static unsigned long long tell(FILE* stream);
-		static void close(FILE* stream);
-	};
+	// Namespace functions
+	void open(FILE** stream, const char* name, const char* mode);
+	unsigned long long read(void* buffer, unsigned long long size, unsigned long long count, FILE* stream);
+	void seek(FILE* stream, long long int offset, int origin);
+	unsigned long long tell(FILE* stream);
+	void close(FILE* stream);
 }
