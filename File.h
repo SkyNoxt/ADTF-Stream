@@ -71,7 +71,7 @@ namespace ADTFStream
 			Reader(File* file);
 
 			// Member functions
-			void start(std::function<void(const Block*)> blockCallback = nullptr, std::function<void()> finishCallback = nullptr);
+			void start(std::function<void(const Block*)> blockCallback, std::function<void()> finishCallback = nullptr);
 			void stop(bool finish);
 
 			// Destructor

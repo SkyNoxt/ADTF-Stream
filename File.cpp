@@ -71,8 +71,7 @@ namespace ADTFStream
 						   { return this->finished || !this->queue.empty(); });
 			while(!queue.empty())
 			{
-				if(blockCallback)
-					blockCallback(queue.front());
+				blockCallback(queue.front());
 				delete queue.front();
 				queue.pop();
 			}
