@@ -1,10 +1,11 @@
 
 #include "Stream.h"
 
-using ADTFStream::Stream;
-
-Stream::~Stream()
+namespace ADTFStream
 {
-	delete index;
-	delete indexAdd;
+	Stream::~Stream()
+	{
+		delete index;
+		delete indexAdd;
+	}
 }

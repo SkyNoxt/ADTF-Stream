@@ -16,23 +16,22 @@ EXPORTS
 	??0StreamIndex@Extensions@ADTFStream@@QEAA@PEAU_iobuf@@_K@Z
 	??1StreamIndex@Extensions@ADTFStream@@QEAA@XZ
 	??0Header@File@ADTFStream@@QEAA@PEAU_iobuf@@@Z
-	?read@File@ADTFStream@@QEAAPEAVBlock@2@XZ
-	?tell@File@ADTFStream@@QEAA_KXZ
-	?seek@File@ADTFStream@@QEAAPEAVEntry@FileIndex@Extensions@2@_K@Z
-	??0File@ADTFStream@@QEAA@PEBD@Z
-	??1?$Extension@VReferencedFiles@Extensions@ADTFStream@@@Extensions@ADTFStream@@QEAA@XZ
-	??1?$Extension@VMarkerInfo@Extensions@ADTFStream@@@Extensions@ADTFStream@@QEAA@XZ
-	??1?$Extension@VFileIndex@Extensions@ADTFStream@@@Extensions@ADTFStream@@QEAA@XZ
-	??1?$Extension@VGUID@Extensions@ADTFStream@@@Extensions@ADTFStream@@QEAA@XZ
-	??1File@ADTFStream@@QEAA@XZ
 	?start@Reader@File@ADTFStream@@QEAAXV?$function@$$A6AXPEBVBlock@ADTFStream@@@Z@std@@V?$function@$$A6AXXZ@5@@Z
 	?produce@Reader@File@ADTFStream@@AEAAXXZ
 	?consume@Reader@File@ADTFStream@@AEAAXV?$function@$$A6AXPEBVBlock@ADTFStream@@@Z@std@@V?$function@$$A6AXXZ@5@@Z
 	?stop@Reader@File@ADTFStream@@QEAAX_N@Z
 	??0Reader@File@ADTFStream@@QEAA@PEBD@Z
+	??0File@ADTFStream@@QEAA@PEBD@Z
 	??0Reader@File@ADTFStream@@QEAA@PEAV12@@Z
 	??1Reader@File@ADTFStream@@QEAA@XZ
-	??1?$unique_lock@Vmutex@std@@@std@@QEAA@XZ
+	??1File@ADTFStream@@QEAA@XZ
+	?tell@File@ADTFStream@@QEAA_KXZ
+	?read@File@ADTFStream@@QEAAPEAVBlock@2@XZ
+	?seek@File@ADTFStream@@QEAAPEAVEntry@FileIndex@Extensions@2@_K@Z
+	??1?$Extension@VReferencedFiles@Extensions@ADTFStream@@@Extensions@ADTFStream@@QEAA@XZ
+	??1?$Extension@VMarkerInfo@Extensions@ADTFStream@@@Extensions@ADTFStream@@QEAA@XZ
+	??1?$Extension@VFileIndex@Extensions@ADTFStream@@@Extensions@ADTFStream@@QEAA@XZ
+	??1?$Extension@VGUID@Extensions@ADTFStream@@@Extensions@ADTFStream@@QEAA@XZ
 	?_Throw_bad_array_new_length@std@@YAXXZ
 	??0bad_array_new_length@std@@QEAA@AEBV01@@Z
 	??0bad_alloc@std@@QEAA@AEBV01@@Z
@@ -45,7 +44,7 @@ EXPORTS
 	??$_Invoke@V?$tuple@P8Reader@File@ADTFStream@@EAAXV?$function@$$A6AXPEBVBlock@ADTFStream@@@Z@std@@V?$function@$$A6AXXZ@5@@ZPEAV123@V45@V65@@std@@$0A@$00$01$02@thread@std@@CAIPEAX@Z
 	??1?$unique_ptr@V?$tuple@P8Reader@File@ADTFStream@@EAAXV?$function@$$A6AXPEBVBlock@ADTFStream@@@Z@std@@V?$function@$$A6AXXZ@5@@ZPEAV123@V45@V65@@std@@U?$default_delete@V?$tuple@P8Reader@File@ADTFStream@@EAAXV?$function@$$A6AXPEBVBlock@ADTFStream@@@Z@std@@V?$function@$$A6AXXZ@5@@ZPEAV123@V45@V65@@std@@@2@@std@@QEAA@XZ
 	?_Growmap@?$deque@PEAVBlock@ADTFStream@@V?$allocator@PEAVBlock@ADTFStream@@@std@@@std@@AEAAX_K@Z
-	?_Xlen@?$deque@PEAVBlock@ADTFStream@@V?$allocator@PEAVBlock@ADTFStream@@@std@@@std@@AEBAXXZ
+	?_Xlen@?$deque@PEAVBlock@ADTFStream@@V?$allocator@PEAVBlock@ADTFStream@@@std@@@std@@CAXXZ
 	??_C@_02JDPG@rb?$AA@
 	??_C@_0L@ELJKODNC@index_add0?$AA@
 	??_C@_06KLKNJODK@index0?$AA@
@@ -80,4 +79,9 @@ EXPORTS
 	??_7bad_array_new_length@std@@6B@
 	??_7bad_alloc@std@@6B@
 	??_7exception@std@@6B@
+	?open@IO@ADTFStream@@YAXPEAPEAU_iobuf@@PEBD1@Z
+	?read@IO@ADTFStream@@YA_KPEAX_K1PEAU_iobuf@@@Z
+	?seek@IO@ADTFStream@@YAXPEAU_iobuf@@_JH@Z
+	?tell@IO@ADTFStream@@YA_KPEAU_iobuf@@@Z
+	?close@IO@ADTFStream@@YAXPEAU_iobuf@@@Z
 	??1Stream@ADTFStream@@QEAA@XZ
